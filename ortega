@@ -1,2 +1,93 @@
-juan david ortega nieves
-02230131060
+def tomar_datos():
+    print("\n=== MENÚ DE USUARIOS ===")
+    print("1. Agregar usuario ")
+    print("2. Agregar varios usuarios ")
+    print("3. Insertar usuario en posición )")
+    print("4. Eliminar usuario por nombre ")
+    print("5. Eliminar último usuario ")
+    print("6. Buscar posición de un usuario ")
+    print("7. Contar cuántas veces está un usuario ")
+    print("8. Ordenar lista de usuarios ")
+    print("9. Invertir lista de usuarios ")
+    print("10. Mostrar lista actual")
+    print("11. Salir")
+    opcion = input("Digite una opción: ")
+    return opcion
+
+def procesar_datos(opcion, usuarios):
+    match opcion:
+        case "1":
+            nombre = input("Digite el nombre del usuario: ")
+            usuarios.append(nombre)
+            return "Usuario agregado."
+
+        case "2":
+            nuevos = input("Digite varios usuarios separados por coma: ")
+            lista_nuevos = nuevos.split(",")
+            usuarios.extend(lista_nuevos)
+            return "Usuarios agregados."
+
+        case "3":
+            nombre = input("Digite el usuario a insertar: ")
+            pos = int(input("Digite la posición: "))
+            usuarios.insert(pos, nombre)
+            return "Usuario insertado."
+
+        case "4":
+            nombre = input("Digite el usuario a eliminar: ")
+            if nombre in usuarios:
+                usuarios.remove(nombre)
+                return "Usuario eliminado."
+            else:
+                return "Ese usuario no está en la lista."
+
+        case "5":
+            if len(usuarios) > 0:
+                usuarios.pop()
+                return "Último usuario eliminado."
+            else:
+                return "La lista está vacía."
+
+        case "6":
+            nombre = input("Digite el usuario a buscar: ")
+            if nombre in usuarios:
+                pos = usuarios.index(nombre)
+                return f"El usuario está en la posición {pos}."
+            else:
+                return "Ese usuario no está en la lista."
+
+        case "7":
+            nombre = input("Digite el usuario a contar: ")
+            veces = usuarios.count(nombre)
+            return f"El usuario aparece {veces} veces."
+
+        case "8":
+            usuarios.sort()
+            return "Lista ordenada."
+
+        case "9":
+            usuarios.reverse()
+            return "Lista invertida."
+
+        case "10":
+            return f"Lista actual: {usuarios}"
+
+        case "11":
+            return "Saliendo del programa."
+
+        case _:
+            return "Opción inválida."
+
+def entregar_datos(mensaje):
+    print("\n--- RESULTADO ---")
+    print(mensaje)
+
+
+usuarios = []
+
+while True:
+    op = tomar_datos()
+    resultado = procesar_datos(op, usuarios)
+    entregar_datos(resultado)
+    if op == "11":
+        break
